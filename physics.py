@@ -93,14 +93,17 @@ class Particle():
                 if dst < S_RAD:
                     dir = [(particle.x - self.x) / dst, (particle.y - self.y) / dst]
                     slope = smothing_kernel_gradient(dst)
-                    particle.force[0] -= self.convert_density_to_pressure() * dir[0] * slope * MASS / particle.density
-                    particle.force[1] -= self.convert_density_to_pressure() * dir[1] * slope * MASS / particle.density
-                    self.force[0] += self.convert_density_to_pressure() * dir[0] * slope * MASS / self.density
-                    self.force[1] += self.convert_density_to_pressure() * dir[1] * slope * MASS / self.density
+                    pressure_force = self.convert_density_to_pressure() * slope * MASS / particle.density
+                    value1 = pressure_force * dir[0]
+                    value2 = pressure_force * dir[1]
+                    particle.force[0] -= value1
+                    particle.force[1] -= value2
+                    self.force[0] +=  value1
+                    self.force[1] += value2
                     
     #UPDATES COLOR OF THE PARTICLE ACCORDING TO THE PARTICLE DENSITY
     def update_color(self) -> None:
-        self.color = (min(max(80,255 * 1000 * (self.density - TARGET_DENSITY)), 255), 80, min(max(80, 255 * 1000 *(TARGET_DENSITY - self.density)), 255))
+        self.color = (min(max(80, 255 * 1000 * (self.density - TARGET_DENSITY)), 255), 80, min(max(80, 255 * 1000 *(TARGET_DENSITY - self.density)), 255))
 
     #UPDATES PARTICLE PHYSICS
     def update(self) -> None:     

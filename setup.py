@@ -13,7 +13,7 @@ def setup_grid(num) -> None:
     y_init = Y_MID - num * SPC / 2
 
     y = y_init
-    id = 1
+    id = 0
 
     for i in range(num):
         x = x_init

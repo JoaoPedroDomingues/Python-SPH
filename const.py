@@ -1,3 +1,5 @@
+from math import pi
+
 '''
 SYSTEM CONSTANTS:
     - RESOLUTION
@@ -38,3 +40,6 @@ PHYSICS CONSTANTS:
 G = 9.81
 TARGET_DENSITY = 0.0001
 PRESSURE_MULTIPLIER = 10 * 100000
+
+VOLUME = pi * (S_RAD ** 4) / 6
+SCALE = 12 / ((S_RAD ** 4) * pi)
